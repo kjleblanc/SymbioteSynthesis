@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Company.Game.Combat;
+using Company.Game.Spawn;
 using UnityEngine;
 
 namespace Company.Game.Waves
@@ -9,6 +10,9 @@ namespace Company.Game.Waves
     {
         [SerializeField]
         private List<WaveConfig> waves = new();
+
+        [SerializeField]
+        private SpawnDirector spawnDirector;
 
         private int currentWaveIndex;
 
@@ -29,6 +33,7 @@ namespace Company.Game.Waves
             if (currentWaveIndex + 1 < waves.Count)
             {
                 currentWaveIndex++;
+                spawnDirector?.HandleWaveAdvanced();
                 return true;
             }
 
@@ -38,6 +43,7 @@ namespace Company.Game.Waves
         public void ResetWaves()
         {
             currentWaveIndex = 0;
+            spawnDirector?.BeginRun();
         }
 
         public void SetWaves(IEnumerable<WaveConfig> configs)
@@ -57,6 +63,12 @@ namespace Company.Game.Waves
             }
 
             currentWaveIndex = 0;
+            spawnDirector?.BeginRun();
+        }
+
+        public void ConfigureSpawnDirector(SpawnDirector director)
+        {
+            spawnDirector = director;
         }
     }
 }

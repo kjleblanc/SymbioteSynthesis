@@ -445,6 +445,8 @@ GameObject:
   - component: {fileID: 100043}
   - component: {fileID: 100044}
   - component: {fileID: 100045}
+  - component: {fileID: 100048}
+  - component: {fileID: 100049}
   - component: {fileID: 100046}
   - component: {fileID: 100047}
   m_Layer: 0
@@ -531,6 +533,36 @@ MonoBehaviour:
   loadOnAwake: 1
   relativeFolder: SymbioteSynthesis/Meta
   fileName: DiscoveryLog.json
+--- !u!114 &100048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f4a9ac0a2640a1bd4512b6f71b04b8, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  runSeed: {fileID: 11400000, guid: 54a811fd778b4080ac673542dbbdb98f, type: 2}
+  fallbackSeed: 41073
+--- !u!114 &100049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a66d6e0561a84fc7846e8f795fe75450, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  boardService: {fileID: 100003}
+  discoveryLogService: {fileID: 100045}
+  rngService: {fileID: 100048}
+  spawnTable: {fileID: 11400000, guid: 9a5ca11ec8154a6f9bb28c0fd5bd388e, type: 2}
 --- !u!114 &100046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,6 +593,7 @@ MonoBehaviour:
   waves:
   - {fileID: 11400000, guid: 643d62df383b4101ba757f20cc72632a, type: 2}
   - {fileID: 11400000, guid: 21b6435cf0154621871fdd7372b842af, type: 2}
+  spawnDirector: {fileID: 100049}
 --- !u!1001 &200000
 PrefabInstance:
   m_ObjectHideFlags: 0

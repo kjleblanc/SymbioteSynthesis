@@ -19,7 +19,7 @@
   - Families (Tier1→Tier2 examples):
     - Red/Claw: `claw_t1.png` (seed 101), `pincer_t2.png` (seed 102)
     - Blue/Carapace: `carapace_t1.png` (201), `bulwark_t2.png` (202)
-    - Purple/Hybrid: cross recipes: `armored_claw_t2.png` (301)
+    - Purple/Hybrid: cross recipes: `armored_claw_t1.png` (300), `armored_claw_t2.png` (301)
   - Import: 256×256, PPU=128, Filter=Point, Compression=Normal Quality, Pivot=Center, Padding=4 px.
 - **Trait Icons** `Assets/_Project/Art/UI/Traits/`
   - `trait_rending.png` (seed 501), `trait_armored.png` (502) — 64×64, PPU=64.

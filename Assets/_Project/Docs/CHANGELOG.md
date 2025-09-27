@@ -25,6 +25,17 @@ All notable changes to this project will be documented in this file. Keep entrie
   - If Broken: Verify FusionService recipe list assignments, ensure DiscoveryLogService has write access to persistentDataPath, and confirm WaveDirector references real WaveConfig assets (guid 643d62df383b4101ba757f20cc72632a / 21b6435cf0154621871fdd7372b842af).
   - Log Note: Discovery persistence serialized to JSON under SymbioteSynthesis/Meta; combat traits Rending/Armored currently static hooks awaiting future behavior expansions.
 
+## v0.0.3 — 2025-09-28
+- Introduced seeded RNGService with dedicated spawn/recipe/loot streams and wired RunSeed.asset in Game scene.
+- Added SpawnDirector with pity/anti-dup Tier1 spawning, DefaultSpawnTable asset, and a Purple Armored Claw T1 definition to broaden family coverage.
+- Authored editmode and playmode tests covering RNG determinism plus pity/anti-dup rules.
+- 2025-09-28 — TC-004 SpawnDirector & RNGService.
+  - You Did: Implemented RNGService/SpawnDirector pipeline, default spawn table, new purple Tier1 data, scene wiring, and regression tests for deterministic spawning.
+  - Expected: Game scene auto-spawns Tier1 cells per table, caps duplicates at three, and guarantees an undiscovered-family spawn after three dry waves.
+  - Quick Test: Open Game.unity, ensure Systems→SpawnDirector references DefaultSpawnTable, then run SpawnDirectorTests and RNGServiceTests in Test Runner.
+  - If Broken: Verify Systems GO has RNGService/SpawnDirector references, confirm RunSeed.asset value propagates, and reseed spawn table entries.
+  - Log Note: Deterministic spawn stack online; pooling left for later optimisation once combat loop perf profiling begins.
+
 ---
 ### Entry Template
 - Date (YYYY-MM-DD)

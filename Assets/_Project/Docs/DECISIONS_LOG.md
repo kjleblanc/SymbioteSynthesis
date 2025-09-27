@@ -82,3 +82,10 @@
   - **Impact:** Added fusion/trait/cell ScriptableObjects, discovery UI prefab, and tests; Game scene wires services for merges/combat handoff.
   - **Rollback:** Remove recipe assets from FusionService list, delete `DiscoveryLog.json`, and disable DiscoveryPanel prefab.
   - **Links:** `Assets/_Project/Scripts/Fusion/FusionService.cs`, `Assets/_Project/Scripts/Discovery/DiscoveryLogService.cs`, `Assets/_Project/UI/Discovery/DiscoveryPanel.prefab`, `Assets/_Project/Scenes/Game.unity`
+- **Date:** 2025-09-28
+  - **Topic:** Deterministic Spawning
+  - **Decision:** Centralised spawn rolls through RNGService category streams and SpawnDirector pity/anti-dup logic backed by DefaultSpawnTable.
+  - **Rationale:** Ensures reproducible Tier1 spawns, accelerates recipe discovery pacing, and prevents board spam without manual scene setup.
+  - **Impact:** Added RNG/Spawn scripts, DefaultSpawnTable asset, purple Tier1 cell, scene wiring, and tests validating RNG determinism and spawn safeguards.
+  - **Rollback:** Detach SpawnDirector from Systems GO, revert WaveDirector hook, and restore manual placements; remove DefaultSpawnTable/RNGService references.
+  - **Links:** `Assets/_Project/Scripts/RNG/RNGService.cs`, `Assets/_Project/Scripts/Spawn/SpawnDirector.cs`, `Assets/_Project/Data/SpawnTables/DefaultSpawnTable.asset`, `Assets/_Project/Scenes/Game.unity`
