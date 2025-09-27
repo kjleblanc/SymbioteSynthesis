@@ -15,6 +15,7 @@
 - Visual clutter at high unit counts → VFX throttle & pooling.
 - Colorblind conflicts → icons + palettes.
 - Fusion tutorial clarity → first-merge overlay & recipe hints.
+- RNG hook not yet plumbed — RunSeed asset exists; plan RNGService facade before TC-002.
 
 ## Next 3 High-Impact Tasks
 1) Implement `FusionService` + tests (TC-002).

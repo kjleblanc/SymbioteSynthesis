@@ -52,3 +52,17 @@
   - **Impact:** No multiplayer/mobile/localization at MVP.
   - **Rollback:** Re-open items post-1.0.
   - **Links:** `Assets/_Project/Docs/MVP.md`, `Assets/_Project/Docs/Roadmap.md`
+- **Date:** 2025-09-26
+  - **Topic:** Seed Source
+  - **Decision:** Centralize deterministic gameplay RNG via `RunSeed` ScriptableObject at `Assets/_Project/Data/Seeds/RunSeed.asset`.
+  - **Rationale:** Single source of truth keeps future RNGService integrations deterministic per guardrails.
+  - **Impact:** All future systems pull seed value from this asset; tests can stub or override it consistently.
+  - **Rollback:** Replace asset/script path and update dependent services; regenerate asset GUID if moving locations.
+  - **Links:** `Assets/_Project/Scripts/Seeding/RunSeed.cs`, `Assets/_Project/Data/Seeds/RunSeed.asset`
+- **Date:** 2025-09-26
+  - **Topic:** Hex Board Bootstrap
+  - **Decision:** Adopt axial (q,r) coordinates with radius bounds and auto-bootstrapped occupants for sticky board merges.
+  - **Rationale:** Axial math keeps neighbor checks simple; bootstrapping lets scenes wire placeholder units without runtime setup scripts.
+  - **Impact:** Designers set `initialQ/initialR` on `HexCellOccupant`; TurnController enforces three merges; InputMergeService surfaces validity for UI.
+  - **Rollback:** Swap to offset coords or manual placement by refactoring `HexBoardService` and occupant serialization; rewire scene references accordingly.
+  - **Links:** `Assets/_Project/Scripts/Board/HexBoardService.cs`, `Assets/_Project/Scripts/Board/HexCellOccupant.cs`, `Assets/_Project/Scenes/Game.unity`

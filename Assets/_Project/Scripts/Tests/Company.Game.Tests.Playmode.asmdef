@@ -1,0 +1,21 @@
+﻿{
+    "name": "Company.Game.Tests.Playmode",
+    "rootNamespace": "Company.Game.Tests",
+    "references": [
+        "Company.Game"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false,
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ]
+}
