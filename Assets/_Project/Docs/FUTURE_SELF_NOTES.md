@@ -15,12 +15,12 @@
 - Visual clutter at high unit counts → VFX throttle & pooling.
 - Colorblind conflicts → icons + palettes.
 - Fusion tutorial clarity → first-merge overlay & recipe hints.
-- RNG hook not yet plumbed — RunSeed asset exists; plan RNGService facade before TC-002.
+- Discovery persistence currently JSON-only; add checksum/versioning before shipping.
 
 ## Next 3 High-Impact Tasks
-1) Implement `FusionService` + tests (TC-002).
-2) Tick-based `CombatResolver` with trait hooks (TC-003).
-3) Discovery persistence + Collection UI polish.
+1) Integrate RNGService facade so CombatResolver/WaveDirector draw from RunSeed deterministically.
+2) Build Discovery Collection screen polish (sorting, trait icons, tooltips) and hook to meta progression UI.
+3) Author combat VFX/audio placeholders and wire into CombatResolver events for clarity.
 
 ## CHANGELOG Entry Stub
 v0.0.1 — Initial docs & production plan committed; seeds and specs defined.

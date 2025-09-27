@@ -14,15 +14,28 @@ namespace Company.Game.Input
         [SerializeField]
         private TurnController turnController;
 
+        [SerializeField]
+        private Fusion.FusionService fusionService;
+
         public bool IsLastTargetValid { get; private set; }
 
         public event Action<HexBoardService.HexMergeResult> MergeSucceeded;
         public event Action<HexBoardService.HexMergeResult> MergeBlocked;
 
-        public void Configure(HexBoardService board, TurnController turn)
+        public void Configure(HexBoardService board, TurnController turn, Fusion.FusionService fusion = null)
         {
             boardService = board;
             turnController = turn;
+            fusionService = fusion;
+            boardService?.ConfigureFusionService(fusionService);
+        }
+
+        private void Awake()
+        {
+            if (fusionService != null && boardService != null)
+            {
+                boardService.ConfigureFusionService(fusionService);
+            }
         }
 
         public bool TryMerge(HexBoardService.AxialCoord from, HexBoardService.AxialCoord to)

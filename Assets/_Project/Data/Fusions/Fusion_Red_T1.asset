@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ef2b00c55f4b628e9ddc37473f1f4c, type: 3}
+  m_Name: Fusion_Red_T1
+  m_EditorClassIdentifier:
+  recipeId: fusion_red_t1
+  inputA: {fileID: 11400000, guid: eb074c92ce6542e58d875da709d31ab1, type: 2}
+  inputB: {fileID: 11400000, guid: eb074c92ce6542e58d875da709d31ab1, type: 2}
+  symmetric: 1
+  output: {fileID: 11400000, guid: e4563299512a42a39f9d7812c4784e0d, type: 2}

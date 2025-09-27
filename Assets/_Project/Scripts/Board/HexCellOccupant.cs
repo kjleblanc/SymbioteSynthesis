@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Company.Game.Fusion;
 using UnityEngine;
 
 namespace Company.Game.Board
@@ -9,18 +11,51 @@ namespace Company.Game.Board
         private int tier = 1;
 
         [SerializeField]
+        private CellTypeDefinition cellType;
+
+        [SerializeField]
         private int initialQ;
 
         [SerializeField]
         private int initialR;
 
-        public int Tier => tier;
+        private void Awake()
+        {
+            SyncTierFromCellType();
+        }
+
+        private void OnValidate()
+        {
+            SyncTierFromCellType();
+        }
+
+        public int Tier => cellType != null ? cellType.Tier : tier;
+
+        public CellTypeDefinition CellType => cellType;
+
+        public IReadOnlyList<CellTraitDefinition> Traits => cellType?.Traits;
         public HexBoardService.AxialCoord Coordinate { get; private set; }
         public HexBoardService Board { get; private set; }
 
+        public void Initialize(CellTypeDefinition type)
+        {
+            cellType = type;
+            SyncTierFromCellType();
+        }
+
         public bool CanMergeWith(HexCellOccupant other)
         {
-            return other != null && other.tier == tier;
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (cellType != null && other.cellType != null)
+            {
+                return cellType.Tier == other.cellType.Tier;
+            }
+
+            return other.tier == tier;
         }
 
         internal void SetBoardReference(HexBoardService board, HexBoardService.AxialCoord coord)
@@ -34,6 +69,7 @@ namespace Company.Game.Board
         internal void ClearBoardReference()
         {
             Board = null;
+            Coordinate = default;
         }
 
         internal HexBoardService.AxialCoord GetInitialCoordinate()
@@ -46,9 +82,29 @@ namespace Company.Game.Board
             gameObject.SetActive(false);
         }
 
-        internal void HandleMergedFrom(HexCellOccupant source)
+        internal void ApplyFusionResult(CellTypeDefinition resultingType)
         {
-            tier = Mathf.Max(tier, source.tier + 1);
+            if (resultingType != null)
+            {
+                cellType = resultingType;
+                tier = Mathf.Max(1, resultingType.Tier);
+            }
+            else
+            {
+                tier = Mathf.Max(tier, tier + 1);
+            }
+        }
+
+        private void SyncTierFromCellType()
+        {
+            if (cellType != null)
+            {
+                tier = Mathf.Max(1, cellType.Tier);
+            }
+            else if (tier < 1)
+            {
+                tier = 1;
+            }
         }
     }
 }

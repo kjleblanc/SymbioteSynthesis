@@ -66,3 +66,19 @@
   - **Impact:** Designers set `initialQ/initialR` on `HexCellOccupant`; TurnController enforces three merges; InputMergeService surfaces validity for UI.
   - **Rollback:** Swap to offset coords or manual placement by refactoring `HexBoardService` and occupant serialization; rewire scene references accordingly.
   - **Links:** `Assets/_Project/Scripts/Board/HexBoardService.cs`, `Assets/_Project/Scripts/Board/HexCellOccupant.cs`, `Assets/_Project/Scenes/Game.unity`
+
+- **Date:** 2025-09-27
+  - **Topic:** Rendering Cleanup
+  - **Decision:** Removed URP package + 2D lights; locked project to Built-in 2D renderer with orthographic main camera.
+  - **Rationale:** Align with MVP constraint to avoid SRP overhead and ensure deterministic lighting between platforms.
+  - **Impact:** `Packages/manifest.json`, `ProjectSettings/GraphicsSettings.asset`, and `Game.unity` updated; URP assets excluded going forward.
+  - **Rollback:** Reinstall URP package, restore SRP asset references, recreate Global Light 2D in scene.
+  - **Links:** `Packages/manifest.json`, `ProjectSettings/GraphicsSettings.asset`, `Assets/_Project/Scenes/Game.unity`
+
+- **Date:** 2025-09-27
+  - **Topic:** Fusion & Discovery Persistence
+  - **Decision:** Introduced FusionService + DiscoveryLogService with JSON persistence keyed by recipeId per deterministic run seed.
+  - **Rationale:** Guarantees reproducible fusion outputs and allows collection progress to persist between sessions without duplicates.
+  - **Impact:** Added fusion/trait/cell ScriptableObjects, discovery UI prefab, and tests; Game scene wires services for merges/combat handoff.
+  - **Rollback:** Remove recipe assets from FusionService list, delete `DiscoveryLog.json`, and disable DiscoveryPanel prefab.
+  - **Links:** `Assets/_Project/Scripts/Fusion/FusionService.cs`, `Assets/_Project/Scripts/Discovery/DiscoveryLogService.cs`, `Assets/_Project/UI/Discovery/DiscoveryPanel.prefab`, `Assets/_Project/Scenes/Game.unity`

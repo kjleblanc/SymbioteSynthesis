@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cbdefc865d644b1845269168dfa9898, type: 3}
+  m_Name: Cell_Purple_ArmoredClaw_T2
+  m_EditorClassIdentifier:
+  cellId: cell_purple_armoredclaw_t2
+  displayName: Armored Claw T2
+  family: Purple
+  tier: 2
+  defaultUpgrade: {fileID: 0}
+  traits:
+  - {fileID: 11400000, guid: cbb89debfb0042bcb2f384e646b0223a, type: 2}
+  - {fileID: 11400000, guid: 04d63915a1b7456e892a2e8d8ef9ae75, type: 2}
+  baseHealth: 11
+  attack: 5
+  speed: 10

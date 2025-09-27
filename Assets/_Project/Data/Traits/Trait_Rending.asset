@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba91efd6f69a467db1b3eb17a17815d2, type: 3}
+  m_Name: Trait_Rending
+  m_EditorClassIdentifier:
+  traitId: trait_rending
+  displayName: Rending
+  keywords:
+  - Offense
+  - ArmorPierce
+  stackable: 1
+  stackingRuleDescription: Pierces 1 point of armor per stack.
+  hooks: {}

@@ -1,4 +1,6 @@
 using System;
+using Company.Game.Combat;
+using Company.Game.Discovery;
 using UnityEngine;
 
 namespace Company.Game.Gameplay
@@ -12,7 +14,14 @@ namespace Company.Game.Gameplay
 
         private int mergesThisTurn;
 
+        [SerializeField]
+        private CombatResolver combatResolver;
+
+        [SerializeField]
+        private DiscoveryLogService discoveryLogService;
+
         public event Action<int, int> MergeCountChanged;
+        public event Action TurnExhausted;
 
         public int MergesPerTurn
         {
@@ -29,12 +38,14 @@ namespace Company.Game.Gameplay
         private void OnEnable()
         {
             mergesThisTurn = Mathf.Clamp(mergesThisTurn, 0, mergesPerTurn);
+            discoveryLogService?.EnsureLoaded();
             NotifyCountChanged();
         }
 
         public void BeginTurn()
         {
             mergesThisTurn = 0;
+            discoveryLogService?.EnsureLoaded();
             NotifyCountChanged();
         }
 
@@ -47,6 +58,11 @@ namespace Company.Game.Gameplay
 
             mergesThisTurn++;
             NotifyCountChanged();
+
+            if (!CanMerge)
+            {
+                HandleTurnExhausted();
+            }
         }
 
         public void ForceSetMergeCount(int value)
@@ -58,6 +74,12 @@ namespace Company.Game.Gameplay
         private void NotifyCountChanged()
         {
             MergeCountChanged?.Invoke(mergesThisTurn, mergesPerTurn);
+        }
+
+        private void HandleTurnExhausted()
+        {
+            TurnExhausted?.Invoke();
+            combatResolver?.ResolveCurrentWave();
         }
     }
 }

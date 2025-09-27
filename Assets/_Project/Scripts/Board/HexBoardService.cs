@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Company.Game.Fusion;
 using UnityEngine;
 
 namespace Company.Game.Board
@@ -13,6 +14,9 @@ namespace Company.Game.Board
 
         private readonly Dictionary<AxialCoord, HexCellOccupant> _occupants = new();
         private bool _bootstrapped;
+
+        [SerializeField]
+        private FusionService fusionService;
 
         public int Radius
         {
@@ -89,6 +93,24 @@ namespace Company.Game.Board
             return _occupants.TryGetValue(coord, out occupant);
         }
 
+        public bool RemoveOccupant(HexCellOccupant occupant)
+        {
+            if (occupant == null)
+            {
+                return false;
+            }
+
+            AxialCoord coord = occupant.Coordinate;
+            if (!_occupants.TryGetValue(coord, out HexCellOccupant stored) || stored != occupant)
+            {
+                return false;
+            }
+
+            _occupants.Remove(coord);
+            occupant.ClearBoardReference();
+            return true;
+        }
+
         public HexMergeResult EvaluateMerge(AxialCoord from, AxialCoord to)
         {
             HexMergeResult result = new HexMergeResult(from, to);
@@ -116,6 +138,11 @@ namespace Company.Game.Board
             return result;
         }
 
+        public void ConfigureFusionService(FusionService service)
+        {
+            fusionService = service;
+        }
+
         public HexMergeResult ExecuteMerge(AxialCoord from, AxialCoord to)
         {
             HexMergeResult result = EvaluateMerge(from, to);
@@ -126,7 +153,16 @@ namespace Company.Game.Board
 
             _occupants.Remove(from);
             result.Source.HandleMergedInto(result.Target);
-            result.Target.HandleMergedFrom(result.Source);
+            if (fusionService != null)
+            {
+                FusionService.FusionResolution resolution = fusionService.ResolveFusion(result.Source, result.Target);
+                result.Resolution = resolution;
+                result.Target.ApplyFusionResult(resolution.OutputType);
+            }
+            else
+            {
+                result.Target.ApplyFusionResult(null);
+            }
             result.Success = true;
             return result;
         }
@@ -194,6 +230,7 @@ namespace Company.Game.Board
                 Target = null;
                 IsValidTarget = false;
                 Success = false;
+                Resolution = default;
             }
 
             public AxialCoord From { get; }
@@ -202,6 +239,7 @@ namespace Company.Game.Board
             public HexCellOccupant Target { get; internal set; }
             public bool IsValidTarget { get; internal set; }
             public bool Success { get; internal set; }
+            public FusionService.FusionResolution Resolution { get; internal set; }
         }
     }
 }

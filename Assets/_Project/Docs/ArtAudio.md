@@ -29,6 +29,7 @@
   - Damage numbers: TMP text (if used), or bitmap numbers sprites.
 - **UI/HUD** `Assets/_Project/Art/UI/HUD/`
   - Tier pips (1–3), Move counter, Wave meter, Discovery tab frames.
+  - Discovery panel placeholder frame generated with seed 9600 (flat diegetic overlay colours).
 - **Marketing** `Assets/_Project/Art/Marketing/`
   - Capsule 616×353, Key 1920×1080, Thumb 512×512 templates.
 
